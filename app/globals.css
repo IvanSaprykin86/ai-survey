@@ -1,0 +1,98 @@
+:root {
+  --paper: #f4f0e8;
+  --paper-deep: #e8e2d6;
+  --sheet: #fffdf9;
+  --ink: #1f1a14;
+  --ink-soft: #4a4339;
+  --muted: #7a7267;
+  --line: #d4cdc0;
+  --accent: #1f4d3a;
+  --accent-hover: #163a2c;
+  --accent-tint: #e6efe9;
+  --highlight: #c96b4a;
+  --radius: 2px;
+  --font-serif: "Literata", "Georgia", serif;
+  --font-sans: "Onest", system-ui, sans-serif;
+  --shadow-sheet: 0 1px 0 rgba(31, 26, 20, 0.06), 0 12px 40px rgba(31, 26, 20, 0.08);
+
+  --page-pad-x: clamp(1rem, 4.5vw, 2rem);
+  --page-pad-bottom: clamp(1.5rem, 5vh, 3rem);
+  --content-max: 42rem;
+  --survey-max: 40rem;
+  --touch-min: 2.75rem;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  overflow-x: clip;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  min-height: 100%;
+  min-height: 100dvh;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-sans);
+  font-size: clamp(1rem, 0.95rem + 0.35vw, 1.0625rem);
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: clip;
+  background-image: radial-gradient(
+      ellipse 120% 80% at 50% -20%,
+      #fff9f0 0%,
+      transparent 55%
+    ),
+    linear-gradient(180deg, var(--paper) 0%, #ebe5db 100%);
+}
+
+a {
+  color: var(--accent);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+}
+
+a:hover {
+  color: var(--highlight);
+}
+
+button {
+  font-family: inherit;
+}
+
+input,
+textarea,
+select {
+  font-size: inherit;
+}
+
+::selection {
+  background: var(--accent-tint);
+  color: var(--ink);
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+}
+
+@media (min-width: 768px) {
+  :root {
+    --content-max: 44rem;
+    --survey-max: 44rem;
+  }
+}
