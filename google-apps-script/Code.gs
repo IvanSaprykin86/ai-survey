@@ -20,10 +20,6 @@ const MAX_BODY_CHARS = 20000;
 const MAX_CELL_CHARS = 2000;
 const SESSION_ID_RE = /^[A-Za-z0-9-]{8,64}$/;
 
-/** Контакт (q12) сохраняется только при согласии респондента. */
-const CONTACT_QUESTION_ID = "q12";
-const CONTACT_CONSENT_ID = "q12_consent";
-
 const QUESTION_IDS = [
   "q1",
   "q2",
@@ -107,9 +103,6 @@ function upsertSurveyRow(payload) {
 
   const answers =
     payload.answers && typeof payload.answers === "object" ? payload.answers : {};
-  if (answers[CONTACT_CONSENT_ID] !== true) {
-    delete answers[CONTACT_QUESTION_ID];
-  }
   const stepIndex = Math.max(0, Math.min(100, Number(payload.stepIndex) || 0));
   const completed = Boolean(payload.completed);
   const now = new Date().toISOString();

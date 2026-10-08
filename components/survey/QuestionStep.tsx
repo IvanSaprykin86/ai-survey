@@ -7,7 +7,6 @@ import type {
   SurveyQuestion,
 } from "@/lib/survey/types";
 import { getBundledQuestion } from "@/lib/survey/questions";
-import { CONTACT_CONSENT_ID } from "@/lib/survey/sync";
 import styles from "./SurveyWizard.module.css";
 import { VoiceTextArea, VoiceTextInput } from "./VoiceTextField";
 
@@ -39,8 +38,6 @@ export function QuestionStep({
         contactValue={answers[bundled.id] as { text?: string } | undefined}
         onChange={onChange}
         onContactChange={(v) => onAnswer(bundled.id, v)}
-        consent={answers[CONTACT_CONSENT_ID] === true}
-        onConsentChange={(v) => onAnswer(CONTACT_CONSENT_ID, v)}
         onSubmit={onSubmit}
       />
     );
@@ -294,8 +291,6 @@ function InviteSingleStep({
   contactValue,
   onChange,
   onContactChange,
-  consent,
-  onConsentChange,
   onSubmit,
 }: {
   question: SurveyQuestion;
@@ -305,8 +300,6 @@ function InviteSingleStep({
   contactValue?: { text?: string };
   onChange: (v: SingleAnswer) => void;
   onContactChange: (v: { text: string }) => void;
-  consent: boolean;
-  onConsentChange: (v: boolean) => void;
   onSubmit: (v?: SingleAnswer) => void;
 }) {
   const selected = value?.selected ?? "";
@@ -326,8 +319,7 @@ function InviteSingleStep({
   };
 
   const canContinue =
-    Boolean(selected) &&
-    (!needsContact || (Boolean(contact.trim()) && consent));
+    Boolean(selected) && (!needsContact || Boolean(contact.trim()));
 
   return (
     <StepShell question={question} answers={answers}>
@@ -355,23 +347,6 @@ function InviteSingleStep({
             placeholder={contactField.placeholder}
             voiceLabel="контакт"
           />
-          <label className={`${styles.option} ${styles.consentOption}`}>
-            <input
-              type="checkbox"
-              checked={consent}
-              onChange={(e) => onConsentChange(e.target.checked)}
-            />
-            <span>
-              Согласен(на) на обработку моего email или Telegram, чтобы получить
-              приглашение
-            </span>
-          </label>
-          <p className={styles.consentNote}>
-            Контакт нужен только для одного приглашения и не передаётся третьим
-            лицам. Ответы хранятся в Google Таблице организаторов опроса.
-            Без согласия контакт не отправляется. Чтобы удалить контакт,
-            ответьте на приглашение.
-          </p>
         </div>
       )}
       <ContinueButton

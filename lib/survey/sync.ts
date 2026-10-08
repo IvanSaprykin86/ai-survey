@@ -8,29 +8,14 @@ export type SyncPayload = {
 
 export type SyncResult = { ok: boolean; error?: string };
 
-/** Контакт (q12) уходит на сервер только после явного согласия (q12_consent). */
-export const CONTACT_QUESTION_ID = "q12";
-export const CONTACT_CONSENT_ID = "q12_consent";
-
-export function stripContactWithoutConsent(
-  answers: Record<string, unknown>,
-): Record<string, unknown> {
-  if (answers[CONTACT_CONSENT_ID] === true) return answers;
-  if (!(CONTACT_QUESTION_ID in answers)) return answers;
-  const rest = { ...answers };
-  delete rest[CONTACT_QUESTION_ID];
-  return rest;
-}
-
 export async function syncToServer(
   payload: SyncPayload,
 ): Promise<SyncResult> {
   const url = process.env.NEXT_PUBLIC_SURVEY_SYNC_URL?.trim();
-  const body = { ...payload, answers: stripContactWithoutConsent(payload.answers) };
 
   if (!url) {
     if (process.env.NODE_ENV === "development") {
-      console.info("[survey sync dev]", body);
+      console.info("[survey sync dev]", payload);
       return { ok: true };
     }
     return { ok: false, error: "sync_url_missing" };
@@ -41,7 +26,7 @@ export async function syncToServer(
       method: "POST",
       redirect: "follow",
       headers: { "Content-Type": "text/plain;charset=utf-8" },
-      body: JSON.stringify(body),
+      body: JSON.stringify(payload),
     });
     const text = await res.text();
     let data: { ok?: boolean; error?: string } = {};

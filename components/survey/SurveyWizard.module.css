@@ -479,17 +479,3 @@
     animation: none;
   }
 }
-
-.consentOption {
-  margin-top: 0.85rem;
-  border-bottom: none;
-  font-size: clamp(0.9rem, 2.6vw, 0.95rem);
-}
-
-.consentNote {
-  margin: 0.35rem 0 0;
-  font-family: var(--font-sans);
-  font-size: 0.8rem;
-  line-height: 1.45;
-  color: var(--ink-soft);
-}
