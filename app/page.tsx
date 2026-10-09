@@ -11,7 +11,7 @@ export default function LandingPage() {
 
       <main className={styles.main}>
         <div className={styles.hero}>
-          <p className={styles.kicker}>≈ 3 минуты · анонимно на устройстве</p>
+          <p className={styles.kicker}>Опрос полностью анонимный · ≈ 3 минуты</p>
           <h1 className={styles.title}>
             ИИ в работе: что удобно, а что мешает?
           </h1>
@@ -23,8 +23,8 @@ export default function LandingPage() {
 
         <div className={styles.sheet}>
           <p className={styles.sheetIntro}>
-            Правильных ответов нет. Можно прерваться и вернуться позже — прогресс
-            сохранится в браузере.
+            Мы не собираем имя, email, телефон и другие персональные данные.
+            Можно прерваться и вернуться позже — прогресс сохранится в браузере.
           </p>
 
           <div className={styles.actions}>

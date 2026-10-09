@@ -210,6 +210,9 @@ export function SurveyWizard() {
   return (
     <div className={styles.shell}>
       <header className={styles.header}>
+        <p className={styles.surveyIntro}>
+          Опрос полностью анонимный · без персональных данных
+        </p>
         <Link href="/" className={styles.backHome}>На главную</Link>
         <div className={styles.progressWrap}>
           <div

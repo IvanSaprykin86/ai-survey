@@ -479,3 +479,9 @@
     animation: none;
   }
 }
+
+.surveyIntro {
+  margin: 0 0 0.35rem;
+  font-size: 0.82rem;
+  color: var(--muted);
+}
